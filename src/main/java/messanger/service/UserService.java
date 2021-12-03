@@ -2,6 +2,8 @@ package messanger.service;
 
 import messanger.model.User;
 
+import java.util.List;
+
 public interface UserService {
 
    void createUser(User user);
@@ -11,4 +13,6 @@ public interface UserService {
    void updateUser(User user);
 
    User findUserByPhoneNumber(String phoneNumber);
+
+   User findByUserId(int id);
 }

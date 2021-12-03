@@ -37,6 +37,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByPhoneNumber(phoneNumber);
     }
 
+    @Override
+    public User findByUserId(int id) {
+        return userRepository.findById(id).orElseThrow();
+    }
+
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
