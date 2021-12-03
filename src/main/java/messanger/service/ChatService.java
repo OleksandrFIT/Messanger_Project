@@ -14,4 +14,6 @@ public interface ChatService {
     void addMessageToTheChat(Message message, Chat chat);
 
     void deleteChat(Chat chat);
+
+    List<Chat> findAll();
 }
