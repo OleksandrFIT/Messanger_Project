@@ -13,4 +13,5 @@ public interface MessageService {
     void editMessage(Message message);
 
     List<Message> messagesByUserId(int userId);
+    //comment for commit check
 }
