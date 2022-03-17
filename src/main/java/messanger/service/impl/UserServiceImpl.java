@@ -1,17 +1,19 @@
 package messanger.service.impl;
 
-import messanger.model.Message;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import messanger.exception.EntityNotFoundException;
 import messanger.model.User;
 import messanger.repository.UserRepository;
 import messanger.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
-
 
     @Override
     public void createUser(User user) {
@@ -19,7 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(int id) {
+        User user = findByUserId(id);
         userRepository.delete(user);
     }
 
@@ -34,12 +37,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByPhoneNumber(String phoneNumber) {
-        return userRepository.findByPhoneNumber(phoneNumber);
+        return userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new EntityNotFoundException("Cannot find a user with phone number=" + phoneNumber));
+    }
+
+    @Override
+    public List<User> findUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
     @Override
     public User findByUserId(int id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cannot find a user with id=" + id));
     }
 
     @Autowired
