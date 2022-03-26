@@ -4,6 +4,7 @@ import messanger.model.Chat;
 import messanger.model.Message;
 import messanger.model.User;
 import messanger.repository.ChatRepository;
+import messanger.repository.UserRepository;
 import messanger.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,21 +35,29 @@ public class ChatServiceImpl implements ChatService {
         chatRepository.save(chat);
     }
 
-    @Override
-    public void addMessageToTheChat(Message message, Chat chat) {
-        List<Message> messages = chat.getMessages();
-        messages.add(message);
-        chat.setMessages(messages);
-        chatRepository.save(chat);
-    }
+//    @Override
+//    public void addMessageToTheChat(Message message, Chat chat) {
+//        List<Message> messages = chat.getMessages();
+//        messages.add(message);
+//        chat.setMessages(messages);
+//        chatRepository.save(chat);
+//    }
 
     @Override
-    public void deleteChat(Chat chat) {
+    public void deleteChat(int chatId) {
+        Chat chat = chatRepository.getById(chatId);
         chatRepository.delete(chat);
     }
+
+
 
     @Override
     public List<Chat> findAll() {
         return chatRepository.findAll();
+    }
+
+    @Autowired
+    public void setChatRepository(ChatRepository chatRepository) {
+        this.chatRepository = chatRepository;
     }
 }

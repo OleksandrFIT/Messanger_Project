@@ -11,9 +11,9 @@ public interface ChatService {
 
     void addUserToTheChat(User user, Chat chat);
 
-    void addMessageToTheChat(Message message, Chat chat);
+//    void addMessageToTheChat(Message message, Chat chat);
 
-    void deleteChat(Chat chat);
+    void deleteChat(int chatId);
 
     List<Chat> findAll();
 }

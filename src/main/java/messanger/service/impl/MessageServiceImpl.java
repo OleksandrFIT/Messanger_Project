@@ -2,6 +2,7 @@ package messanger.service.impl;
 
 import messanger.model.Message;
 import messanger.repository.MessageRepository;
+import messanger.repository.UserRepository;
 import messanger.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,11 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> messagesByUserId(int userId) {
-        List<Message> messages = messageRepository.findByMessageUserId(userId);
-        return messages;
+        return messageRepository.findByMessageUserId(userId);
+    }
+
+    @Autowired
+    public void setMessageRepository(MessageRepository messageRepository) {
+        this.messageRepository=messageRepository;
     }
 }
